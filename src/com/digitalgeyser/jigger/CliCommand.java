@@ -10,4 +10,11 @@ package com.digitalgeyser.jigger;
  */
 public enum CliCommand {
   INIT;
+  
+  public static void printHelp() {
+    Print.out().println("Valid commands:");
+    for ( CliCommand c: values() ) {
+      Print.out().println("  " + c.name().toLowerCase());
+    }
+  }
 }

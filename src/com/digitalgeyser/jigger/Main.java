@@ -28,11 +28,16 @@ public class Main {
     Context ctx = new Context();
     if ( opts.command() == CliCommand.INIT ) {
       ctx.init();
-    }
-    if ( !ctx.read()) {
       return;
     }
-    runCommand(ctx, opts.command(), opts.commandArgs());
+    if ( opts.command() == null ) {
+    	CliCommand.printHelp();
+    } else {
+    	if ( !ctx.read()) {
+    		return;
+    	}
+      runCommand(ctx, opts.command(), opts.commandArgs());
+    }
   }
 
   private void runCommand(final Context ctx,

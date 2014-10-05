@@ -22,7 +22,11 @@ public class Context {
    */
   public void init() {
     File dotJig = new File(".jig");
-    dotJig.mkdirs();
+    if ( dotJig.exists() ) {
+      Print.out().println(".jig already exists.");
+    } else {
+      dotJig.mkdirs();
+    }
   }
 
   /**
