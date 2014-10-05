@@ -48,7 +48,12 @@ public class CommandRegistry {
 
       if ( key.startsWith("cmd.") ) {
         String cmdName = key.substring(4);
-        String className = "com.digitalgeyser.jigger.command." + value;
+        String className;
+        if ( value.contains(".") ) {
+          className = value;
+        } else {
+          className = "com.digitalgeyser.jigger.command." + value;
+        }
         try {
           Class<?> clazz = getClass().getClassLoader().loadClass(className);
           Object x = clazz.newInstance();

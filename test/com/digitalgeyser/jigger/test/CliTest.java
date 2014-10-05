@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.digitalgeyser.jigger.CliOptions;
+import com.digitalgeyser.jigger.CliParser;
 import com.digitalgeyser.jigger.ICliCommand;
 import com.digitalgeyser.jigger.command.CommandRegistry;
 
@@ -29,5 +30,14 @@ public class CliTest {
     ICliCommand cmd = CommandRegistry.instance().command("init");
     opts.setCommand(cmd);
     Assert.assertEquals(cmd, opts.command());
+  }
+
+  @Test
+  public void cliParser() {
+    ICliCommand cmd = CommandRegistry.instance().command("init");
+    CliOptions opts = CliParser.parse(new String[] { "init", "a", "b", "c"});
+    Assert.assertSame(cmd, opts.command());
+    Assert.assertEquals(3, opts.commandArgCount());
+    Assert.assertEquals("c", opts.commandArgs()[2]);
   }
 }
