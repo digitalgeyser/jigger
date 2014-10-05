@@ -2,6 +2,8 @@
 
 package com.digitalgeyser.jigger;
 
+import com.digitalgeyser.jigger.command.CommandRegistry;
+
 /**
  * Main entrypoint.
  *
@@ -26,23 +28,12 @@ public class Main {
     CliOptions opts = CliParser.parse(args);
 
     Context ctx = new Context();
-    if ( opts.command() == CliCommand.INIT ) {
-      ctx.init();
-      return;
-    }
-    if ( opts.command() == null ) {
-    	CliCommand.printHelp();
-    } else {
-    	if ( !ctx.read()) {
-    		return;
-    	}
-      runCommand(ctx, opts.command(), opts.commandArgs());
-    }
-  }
 
-  private void runCommand(final Context ctx,
-                          final CliCommand cmd,
-                          final String[] args) {
-    Print.out().println("Running '" + cmd + "'");
+    if ( opts.command() == null ) {
+      CommandRegistry.instance().printHelp();
+      return;
+    } else {
+      opts.command().execute(ctx, opts.commandArgs());
+    }
   }
 }

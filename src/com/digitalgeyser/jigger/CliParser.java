@@ -2,6 +2,8 @@
 
 package com.digitalgeyser.jigger;
 
+import com.digitalgeyser.jigger.command.CommandRegistry;
+
 
 /**
  * This class contains everything that
@@ -52,7 +54,7 @@ public class CliParser {
         }
       } else {
         if ( !gotCommand ) {
-          CliCommand cmd = CliCommand.valueOf(arg.toUpperCase());
+          ICliCommand cmd = CommandRegistry.instance().command(arg.toLowerCase());
           if ( cmd == null ) {
             Print.out().println("Invalid command: " + arg);
             break;

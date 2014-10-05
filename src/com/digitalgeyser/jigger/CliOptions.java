@@ -15,7 +15,7 @@ import com.digitalgeyser.jigger.CliParser.Args;
  */
 public class CliOptions {
   private final List<String> commandArgs = new ArrayList<String>();
-  private CliCommand command = null;
+  private ICliCommand command = null;
 
   synchronized void addTarget(final String t) {
     commandArgs.add(t);
@@ -40,7 +40,7 @@ public class CliOptions {
    * Returns the command that was requested.
    * @returns CliCommand
    */
-  public CliCommand command() { return command; }
+  public ICliCommand command() { return command; }
 
   /**
    * Returns all the targets that were requested to be built from the
@@ -53,7 +53,7 @@ public class CliOptions {
   /**
    * Sets the command
    */
-  public void setCommand(final CliCommand cmd) {
+  public void setCommand(final ICliCommand cmd) {
     this.command = cmd;
   }
 

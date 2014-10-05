@@ -5,8 +5,9 @@ package com.digitalgeyser.jigger.test;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.digitalgeyser.jigger.CliCommand;
 import com.digitalgeyser.jigger.CliOptions;
+import com.digitalgeyser.jigger.ICliCommand;
+import com.digitalgeyser.jigger.command.CommandRegistry;
 
 /**
  * Unit test for command line options.
@@ -17,9 +18,16 @@ import com.digitalgeyser.jigger.CliOptions;
 public class CliTest {
 
   @Test
-  public void testCliOptions() {
+  public void commandRegistry() {
+    String[] keys = CommandRegistry.instance().commands();
+    Assert.assertTrue(keys.length > 0);
+  }
+
+  @Test
+  public void cliOptions() {
     CliOptions opts = new CliOptions();
-    opts.setCommand(CliCommand.INIT);
-    Assert.assertEquals(CliCommand.INIT, opts.command());
+    ICliCommand cmd = CommandRegistry.instance().command("init");
+    opts.setCommand(cmd);
+    Assert.assertEquals(cmd, opts.command());
   }
 }
