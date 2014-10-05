@@ -19,4 +19,9 @@ public class Print {
   public static PrintStream err() {
     return System.err;
   }
+
+  public static void err(final Throwable t) {
+    err().println("Exception: " + t.getMessage());
+    t.printStackTrace(err());
+  }
 }

@@ -23,7 +23,21 @@ public class Main {
   }
 
   private void run(final String[] args) {
-    CliParser.CliData data = CliParser.parse(args);
+    CliOptions opts = CliParser.parse(args);
 
+    Context ctx = new Context();
+    if ( opts.command() == CliCommand.INIT ) {
+      ctx.init();
+    }
+    if ( !ctx.read()) {
+      return;
+    }
+    runCommand(ctx, opts.command(), opts.commandArgs());
+  }
+
+  private void runCommand(final Context ctx,
+                          final CliCommand cmd,
+                          final String[] args) {
+    Print.out().println("Running '" + cmd + "'");
   }
 }
