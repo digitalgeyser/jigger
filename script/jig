@@ -1,0 +1,6 @@
+#!/bin/bash
+
+CP=`dirname $0`/../bin/
+
+java -cp $CP com.digitalgeyser.jigger.Main $@
+
