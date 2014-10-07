@@ -5,13 +5,13 @@ package com.digitalgeyser.jigger;
 import java.io.File;
 
 /**
- * The context class is carried along with ALL the build targets.
+ * The config class is carried along with ALL the build targets.
  * It lives for the entire duration of the execution of all targets.
  *
  * Created on Oct 5, 2014
  * @author Timotej
  */
-public class Context {
+public class JigConfig {
 
   /**
    * Initializes the .jig directory and the basic database.

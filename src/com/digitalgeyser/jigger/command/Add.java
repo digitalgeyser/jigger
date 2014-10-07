@@ -6,16 +6,15 @@ import com.digitalgeyser.jigger.JigConfig;
 import com.digitalgeyser.jigger.ICliCommand;
 
 /**
- * Init command.
- *
- * Created on Oct 5, 2014
+ * Method that drives the adding of resources.
+ * 
+ * Created on Oct 6, 2014 
  * @author Timotej
  */
-public class Init implements ICliCommand {
+public class Add implements ICliCommand {
 
   @Override
-  public void execute(final JigConfig jc, final String[] args) {
-    jc.init();
+  public void execute(JigConfig ctx, String[] args) {
   }
-
+  
 }

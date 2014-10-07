@@ -25,8 +25,9 @@ public class CommandRegistry {
 
   // Singleton
   private CommandRegistry() {
+    String path = getClass().getPackage().getName().replace('.', '/');
     URL props = getClass().getClassLoader()
-                          .getResource("com/digitalgeyser/jigger/command/command.properties");
+                          .getResource(path + "/command.properties");
     if ( props == null )
       throw new IllegalStateException("Can't locate command.properties");
 
@@ -52,7 +53,7 @@ public class CommandRegistry {
         if ( value.contains(".") ) {
           className = value;
         } else {
-          className = "com.digitalgeyser.jigger.command." + value;
+          className = getClass().getPackage().getName() + "." + value;
         }
         try {
           Class<?> clazz = getClass().getClassLoader().loadClass(className);

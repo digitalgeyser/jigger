@@ -40,4 +40,13 @@ public class CliTest {
     Assert.assertEquals(3, opts.commandArgCount());
     Assert.assertEquals("c", opts.commandArgs()[2]);
   }
+  
+  @Test
+  public void verifyCommandExistence() {
+    String[] cmds = new String[] { "init", "add" };
+    
+    for ( String cmd: cmds ) {
+      Assert.assertNotNull(cmd + " exists", CommandRegistry.instance().command(cmd));
+    }
+  }
 }

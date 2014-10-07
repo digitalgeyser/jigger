@@ -27,13 +27,13 @@ public class Main {
   private void run(final String[] args) {
     CliOptions opts = CliParser.parse(args);
 
-    Context ctx = new Context();
+    JigConfig jc = new JigConfig();
 
     if ( opts.command() == null ) {
       CommandRegistry.instance().printHelp();
       return;
     } else {
-      opts.command().execute(ctx, opts.commandArgs());
+      opts.command().execute(jc, opts.commandArgs());
     }
   }
 }
