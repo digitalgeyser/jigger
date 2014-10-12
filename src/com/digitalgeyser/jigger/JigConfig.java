@@ -4,6 +4,10 @@ package com.digitalgeyser.jigger;
 
 import java.io.File;
 
+import com.digitalgeyser.jigger.db.IJigDatabase;
+import com.digitalgeyser.jigger.db.JigDbException;
+import com.digitalgeyser.jigger.db.JigDbManager;
+
 /**
  * The config class is carried along with ALL the build targets.
  * It lives for the entire duration of the execution of all targets.
@@ -13,6 +17,13 @@ import java.io.File;
  */
 public class JigConfig {
 
+  private IJigDatabase jd;
+  private final File workDir;
+
+  public JigConfig(final File workDir) {
+    this.workDir = workDir;
+  }
+
   /**
    * Initializes the .jig directory and the basic database.
    *
@@ -20,13 +31,9 @@ public class JigConfig {
    * @param
    * @returns void
    */
-  public void init() {
-    File dotJig = new File(".jig");
-    if ( dotJig.exists() ) {
-      Print.out().println(".jig already exists.");
-    } else {
-      dotJig.mkdirs();
-    }
+  public void init() throws JigDbException {
+    jd = JigDbManager.instance().getDefault();
+    jd.createNew(workDir);
   }
 
   /**
@@ -36,23 +43,20 @@ public class JigConfig {
    * @param
    * @returns boolean
    */
-  public boolean read() {
-    File dotJig = new File(".jig");
-    if ( dotJig.exists() && dotJig.isDirectory() ) {
-      try {
-        readDotJig(dotJig);
-        return true;
-      } catch (Exception e) {
-        Print.err(e);
-        return false;
-      }
-    } else {
-      Print.out().println("Can't find .jig directory. Do 'jig init' to create one.");
-      return false;
-    }
+  public void read() throws JigDbException {
+    jd = JigDbManager.instance().getDefault();
+    jd.read(workDir);
   }
 
-  private void readDotJig(final File f) {
-
+  /**
+   * General method used to report errors.
+   *
+   *
+   * @param
+   * @returns void
+   */
+  public void reportError(final Exception e) {
+    Print.err().println("Error: " + e.getMessage());
+    e.printStackTrace();
   }
 }

@@ -2,8 +2,9 @@
 
 package com.digitalgeyser.jigger.command;
 
-import com.digitalgeyser.jigger.JigConfig;
 import com.digitalgeyser.jigger.ICliCommand;
+import com.digitalgeyser.jigger.JigConfig;
+import com.digitalgeyser.jigger.db.JigDbException;
 
 /**
  * Init command.
@@ -14,8 +15,12 @@ import com.digitalgeyser.jigger.ICliCommand;
 public class Init implements ICliCommand {
 
   @Override
-  public void execute(final JigConfig jc, final String[] args) {
-    jc.init();
+  public void execute(final JigConfig jd, final String[] args) {
+    try {
+      jd.init();
+    } catch (JigDbException e) {
+      jd.reportError(e);
+    }
   }
 
 }

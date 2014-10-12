@@ -2,6 +2,8 @@
 
 package com.digitalgeyser.jigger;
 
+import java.io.File;
+
 import com.digitalgeyser.jigger.command.CommandRegistry;
 
 /**
@@ -27,8 +29,7 @@ public class Main {
   private void run(final String[] args) {
     CliOptions opts = CliParser.parse(args);
 
-    JigConfig jc = new JigConfig();
-
+    JigConfig jc = new JigConfig(new File("."));
     if ( opts.command() == null ) {
       CommandRegistry.instance().printHelp();
       return;

@@ -2,6 +2,7 @@
 
 package com.digitalgeyser.jigger;
 
+
 /**
  * Classes of this type are implementing a single CLI command.
  *
