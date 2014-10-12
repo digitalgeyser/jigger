@@ -4,11 +4,11 @@ package com.digitalgeyser.jigger.db;
 
 import com.digitalgeyser.jigger.db.fs.DotJigDatabase;
 
-
 /**
  * Toplevel class for managing different database implementations.
- *
+ * 
  * Created on Oct 12, 2014
+ * 
  * @author Timotej
  */
 public class JigDbManager {
@@ -19,8 +19,8 @@ public class JigDbManager {
 
   /**
    * Returns the single instance of this class.
-   *
-   *
+   * 
+   * 
    * @param
    * @returns CommandRegistry
    */
@@ -28,13 +28,14 @@ public class JigDbManager {
     return LazyHolder.instance;
   }
 
-  private JigDbManager() {}
+  private JigDbManager() {
+  }
 
   /**
-   * Returns the default implementation of the IJigDatabase that will be
-   * used if nothing else is specified.
-   *
-   *
+   * Returns the default implementation of the IJigDatabase that will be used if
+   * nothing else is specified.
+   * 
+   * 
    * @param
    * @returns IJigDatabase
    */

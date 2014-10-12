@@ -4,6 +4,7 @@ package com.digitalgeyser.jigger.test;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
@@ -26,17 +27,19 @@ public class DbTest {
   }
 
   private static JigContext createTestContext(final boolean delete,
-                                              final String ... args) throws IOException {
+                                              final String ... args) throws ParseException, IOException {
     if ( delete ) {
       if ( testDir().exists() )
         FileUtils.deleteDirectory(testDir());
       testDir().mkdirs();
     }
-    return new JigContext(testDir(), CliParser.parse(args));
+    return new JigContext(TestUtility.printer(),
+                          testDir(),
+                          CliParser.parse(TestUtility.printer(), args));
   }
 
   @Test
-  public void testSimpleDbCreation() throws IOException, JigDbException {
+  public void testSimpleDbCreation() throws Exception {
 
     JigContext c = createTestContext(true, "init");
     c.execute();

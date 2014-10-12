@@ -3,13 +3,15 @@
 package com.digitalgeyser.jigger;
 
 import java.io.File;
+import java.text.ParseException;
 
 import com.digitalgeyser.jigger.command.CommandRegistry;
 
 /**
  * Main entrypoint.
- *
+ * 
  * Created on Oct 5, 2014
+ * 
  * @author Timotej
  */
 public class Main {
@@ -18,7 +20,7 @@ public class Main {
 
   /**
    * Main entrypoint.
-   *
+   * 
    * @param
    * @returns void
    */
@@ -27,10 +29,18 @@ public class Main {
   }
 
   private void run(final String[] args) {
-    JigContext jc = new JigContext(new File("."),
-                                   CliParser.parse(args));
-    if ( jc.cliOptions().command() == null ) {
-      CommandRegistry.instance().printHelp();
+    IPrint p = new Print();
+    CliOptions opts;
+
+    try {
+      opts = CliParser.parse(p, args);
+    } catch (ParseException pe) {
+      p.printException(pe);
+      return;
+    }
+    JigContext jc = new JigContext(p, new File("."), opts);
+    if (jc.cliOptions().command() == null) {
+      CommandRegistry.instance().printHelp(p);
       return;
     } else {
       jc.cliOptions().command().execute(jc);

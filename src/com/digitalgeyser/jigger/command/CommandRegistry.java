@@ -10,25 +10,25 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.digitalgeyser.jigger.ICliCommand;
-import com.digitalgeyser.jigger.Print;
+import com.digitalgeyser.jigger.IPrint;
 
 /**
  * Registry of all available commands.
- *
+ * 
  * Created on Oct 5, 2014
+ * 
  * @author Timotej
  */
 public class CommandRegistry {
 
-  private final Map<String, ICliCommand> commandMap
-    = new LinkedHashMap<String, ICliCommand>();
+  private final Map<String, ICliCommand> commandMap = new LinkedHashMap<String, ICliCommand>();
 
   // Singleton
   private CommandRegistry() {
     String path = getClass().getPackage().getName().replace('.', '/');
     URL props = getClass().getClassLoader()
-                          .getResource(path + "/command.properties");
-    if ( props == null )
+        .getResource(path + "/command.properties");
+    if (props == null)
       throw new IllegalStateException("Can't locate command.properties");
 
     Properties p = new Properties();
@@ -39,18 +39,22 @@ public class CommandRegistry {
     } catch (IOException ioe) {
       throw new IllegalStateException("Can't read command.properties", ioe);
     } finally {
-      try { is.close(); } catch (Exception e) {}
+      try {
+        is.close();
+      } catch (Exception e) {
+      }
     }
 
-    for ( Object k: p.keySet() ) {
-      if ( !(k instanceof String) ) continue;
-      String key = (String)k;
+    for (Object k : p.keySet()) {
+      if (!(k instanceof String))
+        continue;
+      String key = (String) k;
       String value = p.getProperty(key);
 
-      if ( key.startsWith("cmd.") ) {
+      if (key.startsWith("cmd.")) {
         String cmdName = key.substring(4);
         String className;
-        if ( value.contains(".") ) {
+        if (value.contains(".")) {
           className = value;
         } else {
           className = getClass().getPackage().getName() + "." + value;
@@ -58,10 +62,10 @@ public class CommandRegistry {
         try {
           Class<?> clazz = getClass().getClassLoader().loadClass(className);
           Object x = clazz.newInstance();
-          if ( x instanceof ICliCommand ) {
-            commandMap.put(cmdName, (ICliCommand)x);
+          if (x instanceof ICliCommand) {
+            commandMap.put(cmdName, (ICliCommand) x);
           }
-        } catch ( Exception e) {
+        } catch (Exception e) {
           throw new IllegalStateException("Can't create class " + className, e);
         }
       }
@@ -74,8 +78,8 @@ public class CommandRegistry {
 
   /**
    * Returns the single instance of this class.
-   *
-   *
+   * 
+   * 
    * @param
    * @returns CommandRegistry
    */
@@ -85,8 +89,8 @@ public class CommandRegistry {
 
   /**
    * Returns all available commands.
-   *
-   *
+   * 
+   * 
    * @param
    * @returns String[]
    */
@@ -96,8 +100,8 @@ public class CommandRegistry {
 
   /**
    * Returns a given command implementation, or null if not present.
-   *
-   *
+   * 
+   * 
    * @param
    * @returns ICliCommand
    */
@@ -107,16 +111,16 @@ public class CommandRegistry {
 
   /**
    * Prints out help for all the commands.
-   *
-   *
+   * 
+   * 
    * @param
    * @returns void
    */
-  public void printHelp() {
-    Print.out().println("Usage: jig COMMAND [ARG1] [ARG2] ...\n");
-    Print.out().println("Valid commands:");
-    for ( String cmd: commands() ) {
-      Print.out().println("  " + cmd);
+  public void printHelp(final IPrint p) {
+    p.println("Usage: jig COMMAND [ARG1] [ARG2] ...\n");
+    p.println("Valid commands:");
+    for (String cmd : commands()) {
+      p.println("  " + cmd);
     }
   }
 }

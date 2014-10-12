@@ -2,6 +2,8 @@
 
 package com.digitalgeyser.jigger.test;
 
+import java.text.ParseException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,9 +35,10 @@ public class CliTest {
   }
 
   @Test
-  public void cliParser() {
+  public void cliParser() throws ParseException {
     ICliCommand cmd = CommandRegistry.instance().command("init");
-    CliOptions opts = CliParser.parse(new String[] { "init", "a", "b", "c"});
+    CliOptions opts = CliParser.parse(TestUtility.printer(),
+                                      new String[] { "init", "a", "b", "c"});
     Assert.assertSame(cmd, opts.command());
     Assert.assertEquals(3, opts.commandArgCount());
     Assert.assertEquals("c", opts.commandArgs()[2]);

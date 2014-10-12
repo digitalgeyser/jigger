@@ -8,8 +8,9 @@ import com.digitalgeyser.jigger.db.JigDbException;
 
 /**
  * Init command.
- *
+ * 
  * Created on Oct 5, 2014
+ * 
  * @author Timotej
  */
 public class Init implements ICliCommand {
@@ -19,7 +20,7 @@ public class Init implements ICliCommand {
     try {
       jd.init();
     } catch (JigDbException e) {
-      jd.reportError(e);
+      jd.printer().printException(e);
     }
   }
 

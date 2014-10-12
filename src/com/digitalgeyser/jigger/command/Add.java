@@ -7,8 +7,9 @@ import com.digitalgeyser.jigger.JigContext;
 
 /**
  * Method that drives the adding of resources.
- *
+ * 
  * Created on Oct 6, 2014
+ * 
  * @author Timotej
  */
 public class Add implements ICliCommand {

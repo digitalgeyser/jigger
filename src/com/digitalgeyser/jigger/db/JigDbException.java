@@ -5,8 +5,9 @@ package com.digitalgeyser.jigger.db;
 /**
  * This exception is used to signify any kind of problems with reading to or
  * writing from the database.
- *
+ * 
  * Created on Oct 12, 2014
+ * 
  * @author Timotej
  */
 public class JigDbException extends Exception {
@@ -30,6 +31,5 @@ public class JigDbException extends Exception {
   public JigDbException(final Throwable cause) {
     super(cause);
   }
-
 
 }

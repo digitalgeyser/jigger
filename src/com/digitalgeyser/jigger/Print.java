@@ -2,26 +2,27 @@
 
 package com.digitalgeyser.jigger;
 
-import java.io.PrintStream;
-
 /**
  * Main interface to all printing.
- *
+ * 
  * Created on Oct 5, 2014
+ * 
  * @author Timotej
  */
-public class Print {
+public class Print implements IPrint {
 
-  public static PrintStream out() {
-    return System.out;
+  @Override
+  public void println(final String s) {
+    System.out.println(s);
   }
 
-  public static PrintStream err() {
-    return System.err;
+  @Override
+  public void printlnErr(final String s) {
+    System.err.println(s);
   }
 
-  public static void err(final Throwable t) {
-    err().println("Exception: " + t.getMessage());
-    t.printStackTrace(err());
+  public void printException(final Throwable t) {
+    printlnErr("Exception: " + t.getMessage());
+    t.printStackTrace();
   }
 }

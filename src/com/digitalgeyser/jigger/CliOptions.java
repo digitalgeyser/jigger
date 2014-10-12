@@ -9,8 +9,9 @@ import com.digitalgeyser.jigger.CliParser.Args;
 
 /**
  * When parsing command line, of tthese objects gets created.
- *
+ * 
  * Created on Oct 5, 2014
+ * 
  * @author Timotej
  */
 public class CliOptions {
@@ -22,16 +23,16 @@ public class CliOptions {
     commandArgs.add(t);
   }
 
-  void processArgument(final Args a, final String s) {
-    switch(a) {
+  void processArgument(final IPrint p, final Args a, final String s) {
+    switch (a) {
     case VERSION:
-      Print.out().println("Jigger, version " + Main.VERSION);
+      p.println("Jigger, version " + Main.VERSION);
       break;
     case HELP:
-      Print.out().println("Usage: jig [OPTIONS] TARGET1 TARGET2 ...");
-      Print.out().println("Valid options:");
-      for ( Args arg: Args.values() ) {
-        Print.out().println("  -" + arg.name().toLowerCase() + ": ");
+      p.println("Usage: jig [OPTIONS] TARGET1 TARGET2 ...");
+      p.println("Valid options:");
+      for (Args arg : Args.values()) {
+        p.println("  -" + arg.name().toLowerCase() + ": ");
       }
       break;
     }
@@ -39,13 +40,16 @@ public class CliOptions {
 
   /**
    * Returns the command that was requested.
+   * 
    * @returns CliCommand
    */
-  public ICliCommand command() { return command; }
+  public ICliCommand command() {
+    return command;
+  }
 
   /**
-   * Returns all the targets that were requested to be built from the
-   * command line.
+   * Returns all the targets that were requested to be built from the command
+   * line.
    */
   public String[] commandArgs() {
     return commandArgs.toArray(new String[0]);
@@ -61,13 +65,16 @@ public class CliOptions {
 
   /**
    * Returns the command name. May be null if no command was present.
+   * 
    * @returns String
    */
-  public String commandName() { return commandName; }
+  public String commandName() {
+    return commandName;
+  }
 
   /**
    * Returns the count of all the targets that were requested
-   *
+   * 
    * @returns int
    */
   public int commandArgCount() {
