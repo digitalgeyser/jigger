@@ -2,7 +2,7 @@
 
 package com.digitalgeyser.jigger.test;
 
-import com.digitalgeyser.jigger.IPrint;
+import com.digitalgeyser.jigger.IPrinter;
 import com.digitalgeyser.jigger.Print;
 
 /**
@@ -13,9 +13,9 @@ import com.digitalgeyser.jigger.Print;
  */
 public class TestUtility {
 
-  private static IPrint printer = new Print();
+  private static IPrinter printer = new Print();
 
-  public static IPrint printer() {
+  public static IPrinter printer() {
     return printer;
   }
 

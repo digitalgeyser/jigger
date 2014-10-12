@@ -9,7 +9,7 @@ package com.digitalgeyser.jigger;
  * 
  * @author Timotej
  */
-public class Print implements IPrint {
+public class Print implements IPrinter {
 
   @Override
   public void println(final String s) {

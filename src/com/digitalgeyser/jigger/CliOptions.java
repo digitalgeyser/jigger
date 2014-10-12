@@ -23,7 +23,7 @@ public class CliOptions {
     commandArgs.add(t);
   }
 
-  void processArgument(final IPrint p, final Args a, final String s) {
+  void processArgument(final IPrinter p, final Args a, final String s) {
     switch (a) {
     case VERSION:
       p.println("Jigger, version " + Main.VERSION);

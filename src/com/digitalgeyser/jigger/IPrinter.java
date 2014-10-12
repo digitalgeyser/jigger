@@ -9,7 +9,8 @@ package com.digitalgeyser.jigger;
  * 
  * @author Timotej
  */
-public interface IPrint {
+public interface IPrinter {
+
   /** Prints a line to output stream */
   public void println(String s);
 

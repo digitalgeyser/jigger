@@ -29,7 +29,7 @@ public class CliParser {
    * @param
    * @returns CliData
    */
-  public static CliOptions parse(final IPrint p, final String[] args)
+  public static CliOptions parse(final IPrinter p, final String[] args)
       throws ParseException {
     CliOptions cd = new CliOptions();
 

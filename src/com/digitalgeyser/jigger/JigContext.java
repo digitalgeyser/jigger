@@ -21,9 +21,9 @@ public class JigContext {
   private IJigDatabase     jd;
   private final File       workDir;
   private final CliOptions opts;
-  private final IPrint     print;
+  private final IPrinter     print;
 
-  public JigContext(final IPrint p, final File workDir, final CliOptions opts) {
+  public JigContext(final IPrinter p, final File workDir, final CliOptions opts) {
     this.opts = opts;
     this.workDir = workDir;
     this.print = p;
@@ -41,7 +41,7 @@ public class JigContext {
     jd.createNew(workDir);
   }
 
-  public IPrint printer() {
+  public IPrinter printer() {
     return print;
   }
 

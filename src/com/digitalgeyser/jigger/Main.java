@@ -29,7 +29,7 @@ public class Main {
   }
 
   private void run(final String[] args) {
-    IPrint p = new Print();
+    IPrinter p = new Print();
     CliOptions opts;
 
     try {
