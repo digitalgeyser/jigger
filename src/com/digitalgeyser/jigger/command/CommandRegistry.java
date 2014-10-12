@@ -113,6 +113,7 @@ public class CommandRegistry {
    * @returns void
    */
   public void printHelp() {
+    Print.out().println("Usage: jig COMMAND [ARG1] [ARG2] ...\n");
     Print.out().println("Valid commands:");
     for ( String cmd: commands() ) {
       Print.out().println("  " + cmd);
