@@ -15,12 +15,14 @@ import com.digitalgeyser.jigger.db.JigDbManager;
  * Created on Oct 5, 2014
  * @author Timotej
  */
-public class JigConfig {
+public class JigContext {
 
   private IJigDatabase jd;
   private final File workDir;
+  private final CliOptions opts;
 
-  public JigConfig(final File workDir) {
+  public JigContext(final File workDir, final CliOptions opts) {
+    this.opts = opts;
     this.workDir = workDir;
   }
 
@@ -34,6 +36,34 @@ public class JigConfig {
   public void init() throws JigDbException {
     jd = JigDbManager.instance().getDefault();
     jd.createNew(workDir);
+  }
+
+  /**
+   * This method executes the command within the cli options, using
+   * this object itself as a context.
+   *
+   *
+   * @param
+   * @returns void
+   */
+  public void execute() throws JigDbException {
+    if ( opts.command() == null )
+      throw new IllegalStateException("Can't execute context with no command");
+    if ( opts.commandName() != "init" ) {
+      read();
+    }
+    opts.command().execute(this);
+  }
+
+  /**
+   * Returns the command line options.
+   *
+   *
+   * @param
+   * @returns CliOptions
+   */
+  public CliOptions cliOptions() {
+    return opts;
   }
 
   /**

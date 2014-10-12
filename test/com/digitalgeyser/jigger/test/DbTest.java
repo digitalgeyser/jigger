@@ -9,9 +9,9 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.digitalgeyser.jigger.db.IJigDatabase;
+import com.digitalgeyser.jigger.CliParser;
+import com.digitalgeyser.jigger.JigContext;
 import com.digitalgeyser.jigger.db.JigDbException;
-import com.digitalgeyser.jigger.db.JigDbManager;
 
 /**
  * Tests for basic DB operations
@@ -21,30 +21,33 @@ import com.digitalgeyser.jigger.db.JigDbManager;
  */
 public class DbTest {
 
-  private File testDir() {
+  private static File testDir() {
     return new File(".testJigDir");
   }
 
-  @Test
-  public void testDbCreate() throws IOException, JigDbException {
-    File d = testDir();
-    if ( d.exists() ) {
-      FileUtils.deleteDirectory(d);
+  private static JigContext createTestContext(final boolean delete,
+                                              final String ... args) throws IOException {
+    if ( delete ) {
+      if ( testDir().exists() )
+        FileUtils.deleteDirectory(testDir());
+      testDir().mkdirs();
     }
+    return new JigContext(testDir(), CliParser.parse(args));
+  }
 
-    d.mkdirs();
+  @Test
+  public void testSimpleDbCreation() throws IOException, JigDbException {
 
-    IJigDatabase db = JigDbManager.instance().getDefault();
+    JigContext c = createTestContext(true, "init");
+    c.execute();
 
     try {
-      db.read(d);
-      Assert.fail("Reading empty directory should fail.");
-    } catch (JigDbException ex) {
-      // Ok, this is what's supposed to happen
+      c = createTestContext(true, "add");
+      c.execute();
+      Assert.fail("add shouldn't succeed");
+    } catch (JigDbException e) {
+      // That's what should happen, since .jig doesn't exist.
     }
-
-    db.createNew(d);
-
   }
 
 }

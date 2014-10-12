@@ -28,7 +28,7 @@ public class CliTest {
   public void cliOptions() {
     CliOptions opts = new CliOptions();
     ICliCommand cmd = CommandRegistry.instance().command("init");
-    opts.setCommand(cmd);
+    opts.setCommand("init", cmd);
     Assert.assertEquals(cmd, opts.command());
   }
 
@@ -40,11 +40,11 @@ public class CliTest {
     Assert.assertEquals(3, opts.commandArgCount());
     Assert.assertEquals("c", opts.commandArgs()[2]);
   }
-  
+
   @Test
   public void verifyCommandExistence() {
     String[] cmds = new String[] { "init", "add" };
-    
+
     for ( String cmd: cmds ) {
       Assert.assertNotNull(cmd + " exists", CommandRegistry.instance().command(cmd));
     }

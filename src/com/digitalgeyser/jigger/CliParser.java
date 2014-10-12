@@ -54,12 +54,13 @@ public class CliParser {
         }
       } else {
         if ( !gotCommand ) {
-          ICliCommand cmd = CommandRegistry.instance().command(arg.toLowerCase());
+          String cmdName = arg.toLowerCase();
+          ICliCommand cmd = CommandRegistry.instance().command(cmdName);
           if ( cmd == null ) {
             Print.out().println("Invalid command: " + arg);
             break;
           }
-          cd.setCommand(cmd);
+          cd.setCommand(cmdName, cmd);
           gotCommand = true;
         } else {
           cd.addTarget(arg);

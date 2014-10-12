@@ -39,7 +39,7 @@ public class DotJigDatabase implements IJigDatabase {
     if ( d.exists() && d.isDirectory()) {
       dotJig = d;
     } else {
-      throw new JigDbException(DIR + " already exists.");
+      throw new JigDbException(DIR + " is missing. You need to run 'init' first.");
     }
   }
 

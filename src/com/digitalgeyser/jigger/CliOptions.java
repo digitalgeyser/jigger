@@ -15,6 +15,7 @@ import com.digitalgeyser.jigger.CliParser.Args;
  */
 public class CliOptions {
   private final List<String> commandArgs = new ArrayList<String>();
+  private String commandName = null;
   private ICliCommand command = null;
 
   synchronized void addTarget(final String t) {
@@ -53,9 +54,16 @@ public class CliOptions {
   /**
    * Sets the command
    */
-  public void setCommand(final ICliCommand cmd) {
+  public void setCommand(final String cmdName, final ICliCommand cmd) {
+    this.commandName = cmdName;
     this.command = cmd;
   }
+
+  /**
+   * Returns the command name. May be null if no command was present.
+   * @returns String
+   */
+  public String commandName() { return commandName; }
 
   /**
    * Returns the count of all the targets that were requested
