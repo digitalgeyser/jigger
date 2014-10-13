@@ -18,7 +18,7 @@ import com.digitalgeyser.jigger.db.JigDbException;
 public class DotJigDatabase implements IJigDatabase {
   private static final String DIR = ".jig";
 
-  private File                dotJig;
+  private File dotJig;
 
   @Override
   public void createNew(final File projectRoot) throws JigDbException {

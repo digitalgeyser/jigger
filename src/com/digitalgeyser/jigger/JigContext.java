@@ -18,10 +18,10 @@ import com.digitalgeyser.jigger.db.JigDbManager;
  */
 public class JigContext {
 
-  private IJigDatabase     jd;
-  private final File       workDir;
+  private IJigDatabase jd;
+  private final File workDir;
   private final CliOptions opts;
-  private final IPrinter     print;
+  private final IPrinter print;
 
   public JigContext(final IPrinter p, final File workDir, final CliOptions opts) {
     this.opts = opts;
