@@ -2,6 +2,8 @@
 
 package com.digitalgeyser.jigger.db;
 
+import com.digitalgeyser.jigger.JigException;
+
 /**
  * This exception is used to signify any kind of problems with reading to or
  * writing from the database.
@@ -10,7 +12,7 @@ package com.digitalgeyser.jigger.db;
  * 
  * @author Timotej
  */
-public class JigDbException extends Exception {
+public class JigDbException extends JigException {
 
   private static final long serialVersionUID = -1969966409803718947L;
 
