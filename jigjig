@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# First we build a microjig out of the java source files, so that we can then execute a main jig build.
+javac -cp src src/com/digitalgeyser/jigger/Main.java src/com/digitalgeyser/jigger/command/*.java
+
+
