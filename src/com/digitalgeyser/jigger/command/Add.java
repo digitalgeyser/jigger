@@ -7,7 +7,6 @@ import com.digitalgeyser.jigger.JigContext;
 
 /**
  * Method that drives the adding of resources.
- * Changed file.
  * 
  * Created on Oct 6, 2014
  * 
