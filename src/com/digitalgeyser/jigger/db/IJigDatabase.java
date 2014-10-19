@@ -4,6 +4,9 @@ package com.digitalgeyser.jigger.db;
 
 import java.io.File;
 
+import com.digitalgeyser.jigger.model.ISource;
+import com.digitalgeyser.jigger.model.ITarget;
+
 /**
  * Interface that represents the "database" for a configuration.
  * 
@@ -36,4 +39,22 @@ public interface IJigDatabase {
    * @returns void
    */
   public void read(File projectRoot) throws JigDbException;
+
+  /**
+   * THis method adds a source to the database.
+   * 
+   * 
+   * @param
+   * @returns void
+   */
+  public ISource addSource(File source) throws JigDbException;
+
+  /**
+   * THis method adds a target to the database.
+   * 
+   * 
+   * @param
+   * @returns ITarget
+   */
+  public ITarget addTarget(File destination) throws JigDbException;
 }
