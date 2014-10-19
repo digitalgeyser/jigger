@@ -4,7 +4,13 @@ LIB=`dirname $0`/lib/commons-io-2.4.jar
 SRC=`dirname $0`/bin/
 DOC=`dirname $0`/doc/
 
-CP="$SRC;$DOC;$LIB"
+if [ "$OSTYPE" == "linux-gnu" ]; then
+  CP="$SRC:$DOC:$LIB"
+elif [ "$OSTYPE" == "darwin"* ]; then
+  CP="$SRC:$DOC:$LIB"
+else
+  CP="$SRC;$DOC;$LIB"
+fi
 
 java -cp $CP com.digitalgeyser.jigger.Main $@
 
