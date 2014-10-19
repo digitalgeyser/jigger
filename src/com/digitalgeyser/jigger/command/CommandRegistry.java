@@ -14,9 +14,9 @@ import com.digitalgeyser.jigger.IPrinter;
 
 /**
  * Registry of all available commands.
- * 
+ *
  * Created on Oct 5, 2014
- * 
+ *
  * @author Timotej
  */
 public class CommandRegistry {
@@ -78,8 +78,8 @@ public class CommandRegistry {
 
   /**
    * Returns the single instance of this class.
-   * 
-   * 
+   *
+   *
    * @param
    * @returns CommandRegistry
    */
@@ -89,8 +89,8 @@ public class CommandRegistry {
 
   /**
    * Returns all available commands.
-   * 
-   * 
+   *
+   *
    * @param
    * @returns String[]
    */
@@ -100,8 +100,8 @@ public class CommandRegistry {
 
   /**
    * Returns a given command implementation, or null if not present.
-   * 
-   * 
+   *
+   *
    * @param
    * @returns ICliCommand
    */
@@ -110,9 +110,20 @@ public class CommandRegistry {
   }
 
   /**
+   * Returns the URL to help documentation.
+   *
+   *
+   * @param
+   * @returns URL
+   */
+  public URL commandHelp(final String commandName) {
+    return getClass().getClassLoader().getResource("cmd-" + commandName + ".txt");
+  }
+
+  /**
    * Prints out help for all the commands.
-   * 
-   * 
+   *
+   *
    * @param
    * @returns void
    */

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-CP=`dirname $0`/src/
+SRC=`dirname $0`/src
+DOC=`dirname $0`/doc
 
-java -cp $CP com.digitalgeyser.jigger.Main $@
+java -cp $SRC:$DOC com.digitalgeyser.jigger.Main $@
 

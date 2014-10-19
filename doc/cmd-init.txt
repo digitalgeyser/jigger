@@ -1,0 +1,15 @@
+jig init
+========
+
+NAME
+----
+jig init - create a new jig database
+
+SYNOPSIS
+--------
+'jig init'
+
+DESCRIPTION
+-----------
+
+Jig init will create a new database at the current directory level.
