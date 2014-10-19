@@ -1,8 +1,12 @@
 #!/bin/bash
 
+CP=lib/commons-io-2.4.jar
 # Remove and create bin directory.
 rm -rf bin/
 mkdir bin
 
-# First we build a microjig out of the java source files, so that we can then execute a main jig build.
-find src/ -name '*.java' | xargs javac 
+cp -R src/* bin/
+
+find bin/ -name '*.java' | xargs javac -cp $CP
+
+find bin/ -name '*.java' -exec rm -rf {} \;

@@ -1,7 +1,10 @@
 #!/bin/bash
 
-SRC=`dirname $0`/src
-DOC=`dirname $0`/doc
+LIB=`dirname $0`/lib/commons-io-2.4.jar
+SRC=`dirname $0`/bin/
+DOC=`dirname $0`/doc/
 
-java -cp $SRC:$DOC com.digitalgeyser.jigger.Main $@
+CP="$SRC;$DOC;$LIB"
+
+java -cp $CP com.digitalgeyser.jigger.Main $@
 

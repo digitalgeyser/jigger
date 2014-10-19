@@ -8,7 +8,7 @@ import java.util.List;
 import com.digitalgeyser.jigger.CliParser.Args;
 
 /**
- * When parsing command line, of tthese objects gets created.
+ * When parsing command line, this object gets created as a result of the parse.
  * 
  * Created on Oct 5, 2014
  * 

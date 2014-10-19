@@ -7,7 +7,7 @@ import java.text.ParseException;
 import com.digitalgeyser.jigger.command.CommandRegistry;
 
 /**
- * This class contains everything that
+ * This class contains everything related with parsing the command line.
  * 
  * Created on Oct 5, 2014
  * 
