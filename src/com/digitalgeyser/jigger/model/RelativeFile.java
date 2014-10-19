@@ -1,35 +1,32 @@
 // Copyright 2014 Platycore
 
-package com.digitalgeyser.jigger.impl;
+package com.digitalgeyser.jigger.model;
 
 import java.io.File;
 
-import com.digitalgeyser.jigger.model.FileRelativity;
-import com.digitalgeyser.jigger.model.IRelativeFile;
-
 /**
  * Default implementation of IRelativeFile
- * 
+ *
  * Created on Oct 19, 2014
- * 
+ *
  * @author Timotej
  */
-public class RelativeFile implements IRelativeFile {
+public class RelativeFile implements IReadable, IWritable {
 
   private final File f;
+  private final FileRelativity relativity;
 
   public RelativeFile(final File f) {
     this.f = f;
+    this.relativity = FileRelativity.ABSOLUTE;
   }
 
-  @Override
   public File file() {
     return f;
   }
 
-  @Override
   public FileRelativity relativity() {
-    return FileRelativity.ABSOLUTE;
+    return relativity;
   }
 
 }

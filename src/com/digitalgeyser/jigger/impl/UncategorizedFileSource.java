@@ -7,33 +7,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.digitalgeyser.jigger.JigException;
-import com.digitalgeyser.jigger.model.IRelativeFile;
+import com.digitalgeyser.jigger.model.IReadable;
 import com.digitalgeyser.jigger.model.ISource;
+import com.digitalgeyser.jigger.model.RelativeFile;
 
 /**
  * This source is a simple file that we don't known anything particular about.
- * 
+ *
  * Created on Oct 19, 2014
- * 
+ *
  * @author Timotej
  */
 public class UncategorizedFileSource implements ISource {
 
-  private final IRelativeFile f;
+  private final RelativeFile f;
 
   public UncategorizedFileSource(final File f) {
     this.f = new RelativeFile(f);
   }
 
   @Override
-  public IRelativeFile relativeFile() {
+  public IReadable readable() {
     return f;
   }
 
   @Override
   public List<String> marshall() {
     List<String> l = new ArrayList<String>();
-    l.add(f.relativity() + ":" + f.file().getAbsolutePath());
+    l.add(f.file().getAbsolutePath());
     return l;
   }
 
