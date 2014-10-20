@@ -2,8 +2,8 @@
 
 package com.digitalgeyser.jigger.db;
 
-import com.digitalgeyser.jigger.model.AbsoluteDirectory;
-import com.digitalgeyser.jigger.model.AbsoluteFile;
+import com.digitalgeyser.jigger.file.JigDir;
+import com.digitalgeyser.jigger.file.JigFile;
 import com.digitalgeyser.jigger.model.ISource;
 import com.digitalgeyser.jigger.model.ITarget;
 
@@ -29,7 +29,7 @@ public interface IJigDatabase {
    * @param
    * @returns void
    */
-  public void createNew(AbsoluteDirectory projectRoot) throws JigDbException;
+  public void createNew(JigDir projectRoot) throws JigDbException;
 
   /**
    * This method is used to read existing database.
@@ -38,7 +38,7 @@ public interface IJigDatabase {
    * @param
    * @returns void
    */
-  public void read(AbsoluteDirectory projectRoot) throws JigDbException;
+  public void read(JigDir projectRoot) throws JigDbException;
 
   /**
    * THis method adds a source to the database.
@@ -47,7 +47,7 @@ public interface IJigDatabase {
    * @param
    * @returns void
    */
-  public ISource addSource(AbsoluteFile source) throws JigDbException;
+  public ISource addSource(JigFile source) throws JigDbException;
 
   /**
    * THis method adds a target to the database.
@@ -56,5 +56,5 @@ public interface IJigDatabase {
    * @param
    * @returns ITarget
    */
-  public ITarget addTarget(AbsoluteFile destination) throws JigDbException;
+  public ITarget addTarget(JigFile destination) throws JigDbException;
 }

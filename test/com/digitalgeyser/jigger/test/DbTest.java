@@ -11,7 +11,7 @@ import org.junit.Test;
 import com.digitalgeyser.jigger.CliParser;
 import com.digitalgeyser.jigger.JigContext;
 import com.digitalgeyser.jigger.db.JigDbException;
-import com.digitalgeyser.jigger.model.AbsoluteDirectory;
+import com.digitalgeyser.jigger.file.JigDir;
 
 /**
  * Tests for basic DB operations
@@ -22,8 +22,8 @@ import com.digitalgeyser.jigger.model.AbsoluteDirectory;
  */
 public class DbTest {
 
-  private static AbsoluteDirectory testDir() {
-    return new AbsoluteDirectory(".testJigDir");
+  private static JigDir testDir() {
+    return new JigDir(".testJigDir");
   }
 
   private static void clean() throws IOException {

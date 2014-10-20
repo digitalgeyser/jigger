@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.digitalgeyser.jigger.JigContext;
 import com.digitalgeyser.jigger.JigException;
-import com.digitalgeyser.jigger.model.AbsoluteFile;
+import com.digitalgeyser.jigger.file.JigFile;
 import com.digitalgeyser.jigger.model.IReadable;
 import com.digitalgeyser.jigger.model.ISource;
 import com.digitalgeyser.jigger.model.RelativeFile;
@@ -23,7 +23,7 @@ public class UncategorizedFileSource implements ISource {
 
   private RelativeFile f;
 
-  public UncategorizedFileSource(final AbsoluteFile f) {
+  public UncategorizedFileSource(final JigFile f) {
     this.f = new RelativeFile(f);
   }
 

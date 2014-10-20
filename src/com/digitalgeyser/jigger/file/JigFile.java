@@ -1,6 +1,6 @@
 // Copyright 2014 Platycore
 
-package com.digitalgeyser.jigger.model;
+package com.digitalgeyser.jigger.file;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,15 +13,15 @@ import java.io.IOException;
  *
  * @author Timotej
  */
-public class AbsoluteFile {
+public class JigFile {
 
   private final File f;
 
-  public AbsoluteFile(final String path) {
+  public JigFile(final String path) {
     this.f = new File(path);
   }
 
-  public AbsoluteFile(final AbsoluteDirectory f, final String name) {
+  public JigFile(final JigDir f, final String name) {
     this.f = new File(f.dir(), name);
   }
 

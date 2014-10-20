@@ -2,7 +2,7 @@
 
 package com.digitalgeyser.jigger.impl;
 
-import com.digitalgeyser.jigger.model.AbsoluteFile;
+import com.digitalgeyser.jigger.file.JigFile;
 import com.digitalgeyser.jigger.model.ISource;
 
 /**
@@ -25,7 +25,7 @@ public class SourceUtilities {
    * @param
    * @returns ISource
    */
-  public static ISource createSource(final AbsoluteFile f) {
+  public static ISource createSource(final JigFile f) {
     return new UncategorizedFileSource(f);
   }
 

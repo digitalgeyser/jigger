@@ -1,6 +1,6 @@
 // Copyright 2014 Platycore
 
-package com.digitalgeyser.jigger.model;
+package com.digitalgeyser.jigger.file;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,19 +14,19 @@ import org.apache.commons.io.FileUtils;
  *
  * @author Timotej
  */
-public class AbsoluteDirectory {
+public class JigDir {
 
   private final File dir;
 
-  private AbsoluteDirectory(final File dir) {
+  private JigDir(final File dir) {
     this.dir = dir;
   }
 
-  public AbsoluteDirectory(final String path) {
+  public JigDir(final String path) {
     this(new File(path));
   }
 
-  public AbsoluteDirectory(final AbsoluteDirectory dir, final String name) {
+  public JigDir(final JigDir dir, final String name) {
     this(new File(dir.dir(), name));
   }
 
@@ -37,18 +37,18 @@ public class AbsoluteDirectory {
    * @param
    * @returns File
    */
-  public AbsoluteFile touch(final String name) throws IOException {
-    AbsoluteFile af = new AbsoluteFile(this, name);
+  public JigFile touch(final String name) throws IOException {
+    JigFile af = new JigFile(this, name);
     af.touch();
     return af;
   }
 
-  public AbsoluteDirectory subdir(final String name) {
-    return new AbsoluteDirectory(this, name);
+  public JigDir subdir(final String name) {
+    return new JigDir(this, name);
   }
 
-  public AbsoluteDirectory mkdir(final String name) throws IOException {
-    AbsoluteDirectory dir = subdir(name);
+  public JigDir mkdir(final String name) throws IOException {
+    JigDir dir = subdir(name);
     dir.mkdir();
     return dir;
   }
