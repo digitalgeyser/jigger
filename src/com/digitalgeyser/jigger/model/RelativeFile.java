@@ -2,7 +2,7 @@
 
 package com.digitalgeyser.jigger.model;
 
-import java.io.File;
+import com.digitalgeyser.jigger.JigContext;
 
 /**
  * Default implementation of IRelativeFile
@@ -13,20 +13,27 @@ import java.io.File;
  */
 public class RelativeFile implements IReadable, IWritable {
 
-  private final File f;
-  private final FileRelativity relativity;
+  private AbsoluteFile f;
+  private FileRelativity relativity;
 
-  public RelativeFile(final File f) {
+  public RelativeFile() {
+    f = null;
+    relativity = FileRelativity.ABSOLUTE;
+  }
+
+  public RelativeFile(final AbsoluteFile f) {
     this.f = f;
     this.relativity = FileRelativity.ABSOLUTE;
   }
 
-  public File file() {
-    return f;
+  @Override
+  public void fromLine(final JigContext context, final String line) {
+    f = new AbsoluteFile(line);
+    relativity = FileRelativity.ABSOLUTE;
   }
 
-  public FileRelativity relativity() {
-    return relativity;
+  @Override
+  public String toLine(final JigContext context) {
+    return f.toString();
   }
-
 }

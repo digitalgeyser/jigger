@@ -2,28 +2,28 @@
 
 package com.digitalgeyser.jigger;
 
-import java.io.File;
-
 import com.digitalgeyser.jigger.db.IJigDatabase;
 import com.digitalgeyser.jigger.db.JigDbException;
 import com.digitalgeyser.jigger.db.JigDbManager;
+import com.digitalgeyser.jigger.model.AbsoluteFile;
 
 /**
  * The config class is carried along with ALL the build targets. It lives for
  * the entire duration of the execution of all targets.
- * 
+ *
  * Created on Oct 5, 2014
- * 
+ *
  * @author Timotej
  */
 public class JigContext {
 
   private IJigDatabase jd;
-  private final File workDir;
+  private final AbsoluteFile workDir;
   private final CliOptions opts;
   private final IPrinter print;
 
-  public JigContext(final IPrinter p, final File workDir, final CliOptions opts) {
+  public JigContext(final IPrinter p, final AbsoluteFile workDir,
+      final CliOptions opts) {
     this.opts = opts;
     this.workDir = workDir;
     this.print = p;
@@ -31,8 +31,8 @@ public class JigContext {
 
   /**
    * Initializes the .jig directory and the basic database.
-   * 
-   * 
+   *
+   *
    * @param
    * @returns void
    */
@@ -48,8 +48,8 @@ public class JigContext {
   /**
    * This method executes the command within the cli options, using this object
    * itself as a context.
-   * 
-   * 
+   *
+   *
    * @param
    * @returns void
    */
@@ -64,8 +64,8 @@ public class JigContext {
 
   /**
    * Returns the command line options.
-   * 
-   * 
+   *
+   *
    * @param
    * @returns CliOptions
    */
@@ -75,8 +75,8 @@ public class JigContext {
 
   /**
    * Initialization of the context means reading the .jig directory.
-   * 
-   * 
+   *
+   *
    * @param
    * @returns boolean
    */

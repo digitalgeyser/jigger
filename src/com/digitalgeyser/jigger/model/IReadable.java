@@ -7,9 +7,9 @@ package com.digitalgeyser.jigger.model;
  * that can result in input for transformation.
  *
  * Created on Oct 19, 2014
- * 
+ *
  * @author Timotej
  */
-public interface IReadable {
+public interface IReadable extends IOneLiner {
 
 }

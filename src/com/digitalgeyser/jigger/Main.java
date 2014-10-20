@@ -2,16 +2,16 @@
 
 package com.digitalgeyser.jigger;
 
-import java.io.File;
 import java.text.ParseException;
 
 import com.digitalgeyser.jigger.command.CommandRegistry;
+import com.digitalgeyser.jigger.model.AbsoluteFile;
 
 /**
  * Main entrypoint.
- * 
+ *
  * Created on Oct 5, 2014
- * 
+ *
  * @author Timotej
  */
 public class Main {
@@ -20,7 +20,7 @@ public class Main {
 
   /**
    * Main entrypoint.
-   * 
+   *
    * @param
    * @returns void
    */
@@ -38,7 +38,7 @@ public class Main {
       p.printException(pe);
       return;
     }
-    JigContext jc = new JigContext(p, new File("."), opts);
+    JigContext jc = new JigContext(p, new AbsoluteFile("."), opts);
     if (jc.cliOptions().command() == null) {
       CommandRegistry.instance().printHelp(p);
       return;

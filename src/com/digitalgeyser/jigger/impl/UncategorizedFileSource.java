@@ -2,11 +2,12 @@
 
 package com.digitalgeyser.jigger.impl;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.digitalgeyser.jigger.JigContext;
 import com.digitalgeyser.jigger.JigException;
+import com.digitalgeyser.jigger.model.AbsoluteFile;
 import com.digitalgeyser.jigger.model.IReadable;
 import com.digitalgeyser.jigger.model.ISource;
 import com.digitalgeyser.jigger.model.RelativeFile;
@@ -20,9 +21,9 @@ import com.digitalgeyser.jigger.model.RelativeFile;
  */
 public class UncategorizedFileSource implements ISource {
 
-  private final RelativeFile f;
+  private RelativeFile f;
 
-  public UncategorizedFileSource(final File f) {
+  public UncategorizedFileSource(final AbsoluteFile f) {
     this.f = new RelativeFile(f);
   }
 
@@ -32,14 +33,16 @@ public class UncategorizedFileSource implements ISource {
   }
 
   @Override
-  public List<String> marshall() {
+  public List<String> marshall(final JigContext context) {
     List<String> l = new ArrayList<String>();
-    l.add(f.file().getAbsolutePath());
+    l.add(f.toLine(context));
     return l;
   }
 
   @Override
-  public void unmarshall(final List<String> list) throws JigException {
-    // TODO: Add unmarshalling
+  public void unmarshall(final JigContext context, final List<String> list)
+      throws JigException {
+    f = new RelativeFile();
+    f.fromLine(context, list.get(0));
   }
 }

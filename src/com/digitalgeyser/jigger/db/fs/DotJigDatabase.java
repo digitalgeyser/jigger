@@ -2,41 +2,37 @@
 
 package com.digitalgeyser.jigger.db.fs;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.apache.commons.io.FileUtils;
-
 import com.digitalgeyser.jigger.db.IJigDatabase;
 import com.digitalgeyser.jigger.db.JigDbException;
 import com.digitalgeyser.jigger.impl.SourceUtilities;
+import com.digitalgeyser.jigger.model.AbsoluteFile;
 import com.digitalgeyser.jigger.model.ISource;
 import com.digitalgeyser.jigger.model.ITarget;
 
 /**
  * Implementation of the IJigDatabase that saves and reads it's content from the
  * .jig directory at the root of the project.
- * 
+ *
  * Created on Oct 12, 2014
- * 
+ *
  * @author Timotej
  */
 public class DotJigDatabase implements IJigDatabase {
   private static final String DIR = ".jig";
 
-  private File dotJig;
-  private File sourceDir;
-  private File destinationDir;
+  private AbsoluteFile dotJig;
+  private AbsoluteFile sourceDir;
+  private AbsoluteFile destinationDir;
 
-  private void initializeDirectories(final File d) {
+  private void initializeDirectories(final AbsoluteFile d) {
     this.dotJig = d;
-    this.sourceDir = new File(d, "source");
-    this.destinationDir = new File(d, "destination");
+    this.sourceDir = new AbsoluteFile(d, "source");
+    this.destinationDir = new AbsoluteFile(d, "destination");
   }
 
   @Override
-  public void createNew(final File projectRoot) throws JigDbException {
-    File d = new File(projectRoot, DIR);
+  public void createNew(final AbsoluteFile projectRoot) throws JigDbException {
+    AbsoluteFile d = new AbsoluteFile(projectRoot, DIR);
     if (d.exists()) {
       throw new JigDbException(DIR + " already exists.");
     }
@@ -49,8 +45,8 @@ public class DotJigDatabase implements IJigDatabase {
   }
 
   @Override
-  public void read(final File projectRoot) throws JigDbException {
-    File d = new File(projectRoot, DIR);
+  public void read(final AbsoluteFile projectRoot) throws JigDbException {
+    AbsoluteFile d = new AbsoluteFile(projectRoot, DIR);
     if (d.exists() && d.isDirectory()) {
       initializeDirectories(d);
     } else {
@@ -60,20 +56,17 @@ public class DotJigDatabase implements IJigDatabase {
   }
 
   @Override
-  public ISource addSource(final File source) throws JigDbException {
-    try {
-      if (!sourceDir.exists())
-        FileUtils.forceMkdir(sourceDir);
-      ISource s = SourceUtilities.createSource(source);
-      // TODO: Add physical saving
-      return s;
-    } catch (IOException ioe) {
-      throw new JigDbException(ioe);
-    }
+  public ISource addSource(final AbsoluteFile source) throws JigDbException {
+    if (!sourceDir.exists())
+      sourceDir.mkdirs();
+    ISource s = SourceUtilities.createSource(source);
+    // TODO: Add physical saving
+    return s;
   }
 
   @Override
-  public ITarget addTarget(final File destination) throws JigDbException {
+  public ITarget addTarget(final AbsoluteFile destination)
+      throws JigDbException {
     return null;
   }
 }
