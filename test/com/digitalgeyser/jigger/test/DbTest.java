@@ -11,46 +11,53 @@ import org.junit.Test;
 import com.digitalgeyser.jigger.CliParser;
 import com.digitalgeyser.jigger.JigContext;
 import com.digitalgeyser.jigger.db.JigDbException;
-import com.digitalgeyser.jigger.model.AbsoluteFile;
+import com.digitalgeyser.jigger.model.AbsoluteDirectory;
 
 /**
  * Tests for basic DB operations
  *
  * Created on Oct 12, 2014
- * 
+ *
  * @author Timotej
  */
 public class DbTest {
 
-  private static AbsoluteFile testDir() {
-    return new AbsoluteFile(".testJigDir");
+  private static AbsoluteDirectory testDir() {
+    return new AbsoluteDirectory(".testJigDir");
   }
 
-  private static JigContext createTestContext(final boolean delete,
-                                              final String... args)
-      throws ParseException, IOException {
-    if (delete) {
-      if (testDir().exists())
-        testDir().deleteDirectory();
-      testDir().mkdirs();
-    }
-    return new JigContext(TestUtility.printer(), testDir(),
-        CliParser.parse(TestUtility.printer(), args));
+  private static void clean() throws IOException {
+    if (testDir().exists())
+      testDir().rmdir();
+    testDir().mkdir();
+  }
+
+  private static void run(final String... args)
+      throws ParseException, IOException, JigDbException {
+    JigContext jc = new JigContext(TestUtility.printer(),
+                                   testDir(),
+                                   CliParser.parse(TestUtility.printer(), args));
+    jc.execute();
   }
 
   @Test
   public void testSimpleDbCreation() throws Exception {
 
-    JigContext c = createTestContext(true, "init");
-    c.execute();
+    clean();
+    run("init");
 
     try {
-      c = createTestContext(true, "add");
-      c.execute();
+      clean();
+      run("add");
       Assert.fail("add shouldn't succeed");
     } catch (JigDbException e) {
       // That's what should happen, since .jig doesn't exist.
     }
+
+    clean();
+    run("init");
+    run("add", "x.java");
+    clean();
   }
 
 }

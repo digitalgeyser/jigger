@@ -26,6 +26,10 @@ public class RelativeFile implements IReadable, IWritable {
     this.relativity = FileRelativity.ABSOLUTE;
   }
 
+  public String name() {
+    return f.name();
+  }
+
   @Override
   public void fromLine(final JigContext context, final String line) {
     f = new AbsoluteFile(line);

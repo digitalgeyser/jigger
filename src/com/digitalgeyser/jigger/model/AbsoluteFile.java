@@ -3,9 +3,8 @@
 package com.digitalgeyser.jigger.model;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-
-import org.apache.commons.io.FileUtils;
 
 /**
  * Abstraction for a file.
@@ -22,23 +21,24 @@ public class AbsoluteFile {
     this.f = new File(path);
   }
 
-  public AbsoluteFile(final AbsoluteFile f, final String name) {
-    this.f = new File(f.f, name);
+  public AbsoluteFile(final AbsoluteDirectory f, final String name) {
+    this.f = new File(f.dir(), name);
+  }
+
+  public String name() {
+    return f.getName();
   }
 
   public boolean exists() {
     return f.exists();
   }
 
-  public void mkdirs() {
-    f.mkdirs();
-  }
-
-  public boolean isDirectory() {
-    return f.isDirectory();
-  }
-
-  public void deleteDirectory() throws IOException {
-    FileUtils.deleteDirectory(f);
+  public void touch() throws IOException {
+    FileOutputStream fos = null;
+    try {
+      fos = new FileOutputStream(f);
+    } finally {
+      fos.close();
+    }
   }
 }

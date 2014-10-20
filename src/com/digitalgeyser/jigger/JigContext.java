@@ -5,7 +5,7 @@ package com.digitalgeyser.jigger;
 import com.digitalgeyser.jigger.db.IJigDatabase;
 import com.digitalgeyser.jigger.db.JigDbException;
 import com.digitalgeyser.jigger.db.JigDbManager;
-import com.digitalgeyser.jigger.model.AbsoluteFile;
+import com.digitalgeyser.jigger.model.AbsoluteDirectory;
 
 /**
  * The config class is carried along with ALL the build targets. It lives for
@@ -18,11 +18,11 @@ import com.digitalgeyser.jigger.model.AbsoluteFile;
 public class JigContext {
 
   private IJigDatabase jd;
-  private final AbsoluteFile workDir;
+  private final AbsoluteDirectory workDir;
   private final CliOptions opts;
   private final IPrinter print;
 
-  public JigContext(final IPrinter p, final AbsoluteFile workDir,
+  public JigContext(final IPrinter p, final AbsoluteDirectory workDir,
       final CliOptions opts) {
     this.opts = opts;
     this.workDir = workDir;
@@ -41,6 +41,20 @@ public class JigContext {
     jd.createNew(workDir);
   }
 
+  /**
+   * Returns the database.
+   *
+   * @returns IJigDatabase
+   */
+  public IJigDatabase db() {
+    return jd;
+  }
+
+  /**
+   * Returns the printer.
+   *
+   * @returns IPrinter
+   */
   public IPrinter printer() {
     return print;
   }

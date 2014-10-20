@@ -33,6 +33,11 @@ public class UncategorizedFileSource implements ISource {
   }
 
   @Override
+  public String name() {
+    return f.name();
+  }
+
+  @Override
   public List<String> marshall(final JigContext context) {
     List<String> l = new ArrayList<String>();
     l.add(f.toLine(context));

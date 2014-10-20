@@ -5,7 +5,7 @@ package com.digitalgeyser.jigger;
 import java.text.ParseException;
 
 import com.digitalgeyser.jigger.command.CommandRegistry;
-import com.digitalgeyser.jigger.model.AbsoluteFile;
+import com.digitalgeyser.jigger.model.AbsoluteDirectory;
 
 /**
  * Main entrypoint.
@@ -38,7 +38,7 @@ public class Main {
       p.printException(pe);
       return;
     }
-    JigContext jc = new JigContext(p, new AbsoluteFile("."), opts);
+    JigContext jc = new JigContext(p, new AbsoluteDirectory("."), opts);
     if (jc.cliOptions().command() == null) {
       CommandRegistry.instance().printHelp(p);
       return;

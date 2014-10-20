@@ -2,9 +2,12 @@
 
 package com.digitalgeyser.jigger.db.fs;
 
+import java.io.IOException;
+
 import com.digitalgeyser.jigger.db.IJigDatabase;
 import com.digitalgeyser.jigger.db.JigDbException;
 import com.digitalgeyser.jigger.impl.SourceUtilities;
+import com.digitalgeyser.jigger.model.AbsoluteDirectory;
 import com.digitalgeyser.jigger.model.AbsoluteFile;
 import com.digitalgeyser.jigger.model.ISource;
 import com.digitalgeyser.jigger.model.ITarget;
@@ -20,24 +23,25 @@ import com.digitalgeyser.jigger.model.ITarget;
 public class DotJigDatabase implements IJigDatabase {
   private static final String DIR = ".jig";
 
-  private AbsoluteFile dotJig;
-  private AbsoluteFile sourceDir;
-  private AbsoluteFile destinationDir;
+  private AbsoluteDirectory dotJig;
+  private AbsoluteDirectory sourceDir;
+  private AbsoluteDirectory targetDir;
 
-  private void initializeDirectories(final AbsoluteFile d) {
+  private void initializeDirectories(final AbsoluteDirectory d) {
     this.dotJig = d;
-    this.sourceDir = new AbsoluteFile(d, "source");
-    this.destinationDir = new AbsoluteFile(d, "destination");
+    this.sourceDir = d.subdir("source");
+    this.targetDir = d.subdir("target");
   }
 
   @Override
-  public void createNew(final AbsoluteFile projectRoot) throws JigDbException {
-    AbsoluteFile d = new AbsoluteFile(projectRoot, DIR);
+  public void createNew(final AbsoluteDirectory projectRoot)
+      throws JigDbException {
+    AbsoluteDirectory d = new AbsoluteDirectory(projectRoot, DIR);
     if (d.exists()) {
       throw new JigDbException(DIR + " already exists.");
     }
-    d.mkdirs();
-    if (d.exists() && d.isDirectory()) {
+    d.mkdir();
+    if (d.exists()) {
       initializeDirectories(d);
     } else {
       throw new JigDbException("Could not create " + DIR + " directory.");
@@ -45,9 +49,9 @@ public class DotJigDatabase implements IJigDatabase {
   }
 
   @Override
-  public void read(final AbsoluteFile projectRoot) throws JigDbException {
-    AbsoluteFile d = new AbsoluteFile(projectRoot, DIR);
-    if (d.exists() && d.isDirectory()) {
+  public void read(final AbsoluteDirectory projectRoot) throws JigDbException {
+    AbsoluteDirectory d = projectRoot.subdir(DIR);
+    if (d.exists()) {
       initializeDirectories(d);
     } else {
       throw new JigDbException(DIR
@@ -58,10 +62,14 @@ public class DotJigDatabase implements IJigDatabase {
   @Override
   public ISource addSource(final AbsoluteFile source) throws JigDbException {
     if (!sourceDir.exists())
-      sourceDir.mkdirs();
+      sourceDir.mkdir();
     ISource s = SourceUtilities.createSource(source);
-    // TODO: Add physical saving
-    return s;
+    try {
+      sourceDir.touch(s.name());
+      return s;
+    } catch (IOException ioe) {
+      throw new JigDbException(ioe);
+    }
   }
 
   @Override
