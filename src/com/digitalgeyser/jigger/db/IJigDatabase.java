@@ -57,4 +57,20 @@ public interface IJigDatabase {
    * @returns ITarget
    */
   public ITarget addTarget(JigFile destination) throws JigDbException;
+
+  /**
+   * General purpose key/value pair properties that are carried along with the database.
+   *
+   * @returns Properties
+   */
+  public String[] preferenceKeys();
+
+  /**
+   * Returns the value of the preference under a given key.
+   *
+   *
+   * @param key
+   * @returns Object
+   */
+  public Object preferenceValue(String key);
 }

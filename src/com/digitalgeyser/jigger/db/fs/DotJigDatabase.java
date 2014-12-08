@@ -3,12 +3,14 @@
 package com.digitalgeyser.jigger.db.fs;
 
 import java.io.IOException;
+import java.util.Map;
 
 import com.digitalgeyser.jigger.db.IJigDatabase;
 import com.digitalgeyser.jigger.db.JigDbException;
 import com.digitalgeyser.jigger.file.JigDir;
 import com.digitalgeyser.jigger.file.JigFile;
 import com.digitalgeyser.jigger.impl.SourceUtilities;
+import com.digitalgeyser.jigger.impl.YamlUtilities;
 import com.digitalgeyser.jigger.model.ISource;
 import com.digitalgeyser.jigger.model.ITarget;
 
@@ -22,10 +24,12 @@ import com.digitalgeyser.jigger.model.ITarget;
  */
 public class DotJigDatabase implements IJigDatabase {
   private static final String DIR = ".jig";
+  private static final String PROPS = "prefs.yaml";
 
   private JigDir dotJig;
   private JigDir sourceDir;
   private JigDir targetDir;
+  private Map<String, Object> preferences = null;
 
   private void initializeDirectories(final JigDir d) {
     this.dotJig = d;
@@ -76,5 +80,37 @@ public class DotJigDatabase implements IJigDatabase {
   public ITarget addTarget(final JigFile destination)
       throws JigDbException {
     return null;
+  }
+
+  private void readPreferences() throws IOException {
+    JigFile f = dotJig.file(PROPS);
+    Object x = YamlUtilities.readYamlFile(f.file());
+    if ( x instanceof Map ) {
+      this.preferences = (Map<String, Object>)x;
+    }
+  }
+
+  @Override
+  public String[] preferenceKeys() {
+    if ( preferences == null ) {
+      try {
+        readPreferences();
+      } catch (Exception e) {
+        return new String[0];
+      }
+    }
+    return preferences.keySet().toArray(new String[0]);
+  }
+
+  @Override
+  public Object preferenceValue(final String key) {
+    if ( preferences == null ) {
+      try {
+        readPreferences();
+      } catch (Exception e) {
+        return new String[0];
+      }
+    }
+    return preferences.get(key);
   }
 }

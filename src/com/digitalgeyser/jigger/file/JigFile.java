@@ -41,4 +41,8 @@ public class JigFile {
       fos.close();
     }
   }
+
+  public File file() {
+    return f;
+  }
 }

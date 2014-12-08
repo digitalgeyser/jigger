@@ -10,5 +10,10 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/jigger/lib/commons-io-2.4-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/snakeyaml-1.11.jar" sourcepath="lib/snakeyaml-1.11-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/jigger/lib/snakeyaml-1.11-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

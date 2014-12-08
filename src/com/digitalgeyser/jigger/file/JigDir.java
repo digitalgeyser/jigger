@@ -43,6 +43,17 @@ public class JigDir {
     return af;
   }
 
+  /**
+   * Create a file reference in this directory.
+   *
+   *
+   * @param
+   * @returns File
+   */
+  public JigFile file(final String name) throws IOException {
+    return new JigFile(this, name);
+  }
+
   public JigDir subdir(final String name) {
     return new JigDir(this, name);
   }
