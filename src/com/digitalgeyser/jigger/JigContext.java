@@ -67,7 +67,7 @@ public class JigContext {
    * @param
    * @returns void
    */
-  public void execute() throws JigDbException {
+  public void execute() throws JigException {
     if (opts.command() == null)
       throw new IllegalStateException("Can't execute context with no command");
     if (opts.commandName() != "init") {

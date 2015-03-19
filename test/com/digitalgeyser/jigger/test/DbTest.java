@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.digitalgeyser.jigger.CliParser;
 import com.digitalgeyser.jigger.JigContext;
+import com.digitalgeyser.jigger.JigException;
 import com.digitalgeyser.jigger.db.JigDbException;
 import com.digitalgeyser.jigger.file.JigDir;
 
@@ -33,7 +34,7 @@ public class DbTest {
   }
 
   private static void run(final String... args)
-      throws ParseException, IOException, JigDbException {
+      throws ParseException, IOException, JigException {
     JigContext jc = new JigContext(TestUtility.printer(),
                                    testDir(),
                                    CliParser.parse(TestUtility.printer(), args));

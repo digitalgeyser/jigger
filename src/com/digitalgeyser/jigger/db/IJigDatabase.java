@@ -41,7 +41,7 @@ public interface IJigDatabase {
   public void read(JigDir projectRoot) throws JigDbException;
 
   /**
-   * THis method adds a source to the database.
+   * Add a source to the database.
    *
    *
    * @param
@@ -50,7 +50,7 @@ public interface IJigDatabase {
   public ISource addSource(JigFile source) throws JigDbException;
 
   /**
-   * THis method adds a target to the database.
+   * Add a target to the database.
    *
    *
    * @param

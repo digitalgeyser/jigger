@@ -13,5 +13,5 @@ package com.digitalgeyser.jigger;
 public interface ICliCommand {
 
   /** Executes a command */
-  void execute(JigContext jc);
+  void execute(JigContext jc) throws JigException;
 }

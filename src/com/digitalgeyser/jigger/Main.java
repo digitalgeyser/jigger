@@ -43,7 +43,11 @@ public class Main {
       CommandRegistry.instance().printHelp(p);
       return;
     } else {
-      jc.cliOptions().command().execute(jc);
+      try {
+        jc.cliOptions().command().execute(jc);
+      } catch (JigException je) {
+        jc.printer().printException(je);
+      }
     }
   }
 }

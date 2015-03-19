@@ -31,7 +31,20 @@ public class Help implements ICliCommand {
   }
 
   private static void printGeneralHelp(final IPrinter p) {
-    p.println("General help");
+    p.println("Usage: jig <command> [<args>]");
+    p.println("");
+    p.println("Available jig commands are:");
+    int len = 0;
+    String[] cmds = CommandRegistry.instance().commands();
+    for ( String s: cmds ) {
+      if ( s.length() > len )
+        len = s.length();
+    }
+    for ( String cmd: cmds ) {
+      String shortDesc = CommandRegistry.instance().commandShortDescription(cmd);
+      String s = String.format("   %-" + (len+2) + "s   %s", cmd, shortDesc);
+      p.println(s);
+    }
   }
 
   private static void printCommandHelp(final IPrinter p, final String cmd) {

@@ -4,7 +4,7 @@ package com.digitalgeyser.jigger.command;
 
 import com.digitalgeyser.jigger.ICliCommand;
 import com.digitalgeyser.jigger.JigContext;
-import com.digitalgeyser.jigger.db.JigDbException;
+import com.digitalgeyser.jigger.JigException;
 import com.digitalgeyser.jigger.file.JigFile;
 
 /**
@@ -17,15 +17,11 @@ import com.digitalgeyser.jigger.file.JigFile;
 public class Add implements ICliCommand {
 
   @Override
-  public void execute(final JigContext ctx) {
+  public void execute(final JigContext ctx) throws JigException {
     String[] args = ctx.cliOptions().commandArgs();
     for (String a : args) {
       JigFile f = new JigFile(a);
-      try {
-        ctx.db().addSource(f);
-      } catch (JigDbException jde) {
-        ctx.printer().printException(jde);
-      }
+      ctx.db().addSource(f);
     }
   }
 }

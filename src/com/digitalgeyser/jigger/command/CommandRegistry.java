@@ -110,6 +110,17 @@ public class CommandRegistry {
   }
 
   /**
+   * Returns the short description for a command.
+   *
+   *
+   * @param
+   * @returns String
+   */
+  public String commandShortDescription(final String commandName) {
+    return "Command that does " + commandName;
+  }
+
+  /**
    * Returns the URL to help documentation.
    *
    *
