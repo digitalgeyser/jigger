@@ -48,7 +48,7 @@ public class Main {
       return;
     } else {
       try {
-        jc.cliOptions().command().execute(jc);
+        jc.execute();
       } catch (JigException je) {
         jc.printer().printException(je);
       }
