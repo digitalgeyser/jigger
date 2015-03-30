@@ -22,8 +22,9 @@ public class JigContext {
   private final CliOptions opts;
   private final IPrinter print;
 
-  public JigContext(final IPrinter p, final JigDir workDir,
-      final CliOptions opts) {
+  public JigContext(final IPrinter p,
+                    final JigDir workDir,
+                    final CliOptions opts) {
     this.opts = opts;
     this.workDir = workDir;
     this.print = p;
@@ -51,6 +52,17 @@ public class JigContext {
   }
 
   /**
+   * Returns true if jigger runs in verbose mode.
+   *
+   *
+   * @param
+   * @returns boolean
+   */
+  public boolean isVerbose() {
+    return opts.isVebose();
+  }
+
+  /**
    * Returns the printer.
    *
    * @returns IPrinter
@@ -68,6 +80,8 @@ public class JigContext {
    * @returns void
    */
   public void execute() throws JigException {
+    if(isVerbose())
+      printer().println("Executing context.");
     if (opts.command() == null)
       throw new IllegalStateException("Can't execute context with no command");
     if (opts.commandName() != "init") {
@@ -95,6 +109,8 @@ public class JigContext {
    * @returns boolean
    */
   public void read() throws JigDbException {
+    if(isVerbose())
+      printer().println("Initializing database.");
     jd = JigDbManager.instance().getDefault();
     jd.read(workDir);
   }

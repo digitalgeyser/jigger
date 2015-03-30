@@ -10,7 +10,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.digitalgeyser.jigger.ICliCommand;
-import com.digitalgeyser.jigger.IPrinter;
+import com.digitalgeyser.jigger.JigContext;
+import com.digitalgeyser.jigger.JigException;
 
 /**
  * Registry of all available commands.
@@ -138,11 +139,7 @@ public class CommandRegistry {
    * @param
    * @returns void
    */
-  public void printHelp(final IPrinter p) {
-    p.println("Usage: jig COMMAND [ARG1] [ARG2] ...\n");
-    p.println("Valid commands:");
-    for (String cmd : commands()) {
-      p.println("  " + cmd);
-    }
+  public void printHelp(final JigContext jc) throws JigException {
+    command("help").execute(jc);
   }
 }

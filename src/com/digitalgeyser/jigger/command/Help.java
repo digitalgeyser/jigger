@@ -7,6 +7,7 @@ import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
 
+import com.digitalgeyser.jigger.GlobalOptions;
 import com.digitalgeyser.jigger.ICliCommand;
 import com.digitalgeyser.jigger.IPrinter;
 import com.digitalgeyser.jigger.JigContext;
@@ -31,7 +32,12 @@ public class Help implements ICliCommand {
   }
 
   private static void printGeneralHelp(final IPrinter p) {
-    p.println("Usage: jig <command> [<args>]");
+    p.println("Usage: jig [GLOBAL OPTIONS] [COMMAND] [COMMAND OPTIONS]");
+    p.println("");
+    p.println("Available global options are:");
+    for ( GlobalOptions go: GlobalOptions.values() ) {
+      p.println("   -" + go.name().toLowerCase());
+    }
     p.println("");
     p.println("Available jig commands are:");
     int len = 0;

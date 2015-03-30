@@ -5,42 +5,39 @@ package com.digitalgeyser.jigger;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.digitalgeyser.jigger.CliParser.Args;
 
 /**
  * When parsing command line, this object gets created as a result of the parse.
- * 
+ *
  * Created on Oct 5, 2014
- * 
+ *
  * @author Timotej
  */
 public class CliOptions {
   private final List<String> commandArgs = new ArrayList<String>();
   private String commandName = null;
   private ICliCommand command = null;
+  private boolean verbose = false;
 
   synchronized void addTarget(final String t) {
     commandArgs.add(t);
   }
 
-  void processArgument(final IPrinter p, final Args a, final String s) {
+  void processArgument(final IPrinter p, final GlobalOptions a, final String s) {
     switch (a) {
     case VERSION:
       p.println("Jigger, version " + Main.VERSION);
       break;
-    case HELP:
-      p.println("Usage: jig [OPTIONS] TARGET1 TARGET2 ...");
-      p.println("Valid options:");
-      for (Args arg : Args.values()) {
-        p.println("  -" + arg.name().toLowerCase() + ": ");
-      }
+    case VERBOSE:
+      p.println("Verbose mode on.");
+      this.verbose = true;
       break;
     }
   }
 
   /**
    * Returns the command that was requested.
-   * 
+   *
    * @returns CliCommand
    */
   public ICliCommand command() {
@@ -65,7 +62,7 @@ public class CliOptions {
 
   /**
    * Returns the command name. May be null if no command was present.
-   * 
+   *
    * @returns String
    */
   public String commandName() {
@@ -74,10 +71,18 @@ public class CliOptions {
 
   /**
    * Returns the count of all the targets that were requested
-   * 
+   *
    * @returns int
    */
   public int commandArgCount() {
     return commandArgs.size();
+  }
+
+  /**
+   * Returns true if -verbose switch was passed on cli.
+   *
+   */
+  public boolean isVebose() {
+    return verbose;
   }
 }

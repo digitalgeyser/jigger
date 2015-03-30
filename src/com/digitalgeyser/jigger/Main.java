@@ -40,7 +40,11 @@ public class Main {
     }
     JigContext jc = new JigContext(p, new JigDir("."), opts);
     if (jc.cliOptions().command() == null) {
-      CommandRegistry.instance().printHelp(p);
+      try {
+        CommandRegistry.instance().printHelp(jc);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
       return;
     } else {
       try {
